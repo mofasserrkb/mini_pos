@@ -1,8 +1,7 @@
-@include('admin.header');
+@include('admin.header')
     <!-- Wrapper Start -->
     <div class="wrapper">
-@include('admin.sidebar');
-@include('admin.navbar');
+@include('admin.sidebar')
 @yield('content')
 </div>
-@include('admin.footer');
+@include('admin.footer')
