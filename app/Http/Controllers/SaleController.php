@@ -14,10 +14,9 @@ class SaleController extends Controller
 
     public function  getOrder(Request $request){
 
-            // dd($request);
+         //  dd($request);
          // dd($request->total_purchaseAmount);
 
-        // dd($last);
         $request->validate(
             [
                 'customer_id'=>'required',
@@ -26,6 +25,12 @@ class SaleController extends Controller
                 'customer_id.required'=>'Select A Customer First!',
             ]
     );
+        $allproduct= Product::all();
+      $va=  Product::select("id")->latest()->get();
+
+           //     dd($va);
+      // dd(count($allproduct));
+      //  dd($allproduct[0]->id);
         $products = Product::join('sales', 'products.id', '=', 'sales.product_id')
         ->get(['products.id','products.quantity', 'sales.pquantity','sales.current_stock','sales.stock','sales.product_id']);
 
@@ -43,7 +48,7 @@ class SaleController extends Controller
 
             Sale::create(
                 [
-
+                    'tran_id'=>$request->tranid,
                     'product_id'=>$request->product_id[$i],
                     'pquantity'=>$request->pquantity[$i],
                     'current_stock'=>$request->stock[$i] - $request->pquantity[$i],
@@ -70,7 +75,7 @@ class SaleController extends Controller
 
 
         }
-        // $data = \App\Models\Product::select("name")->where("id", "=", 2)->get();
+        //syntax: $data = \App\Models\Product::select("name")->where("id", "=", 2)->get();
         // dd($data);
 
         $customerRecord = Customer::where('id', '=', $request->customer_id)->get();
@@ -80,15 +85,14 @@ class SaleController extends Controller
        // dd($customerRecord[0]->customer_name);
 
        $total_purchaseAmount =$request->total_purchaseAmount;
+       $trans = Sale::where('tran_id',$request->tranid )->get();
+      // dd($trans);
         $latest = Sale::where('customer_id',$request->customer_id )->latest()->get();
         $countno= count($latest );
-        //  dd($latest);
+        $trancount= count($trans);
+         //  dd($latest);
         // dd($latest[0]->price);
-        return view('admin.invoice',compact('latest','total_purchaseAmount','address','phone','name'));
+        return view('admin.invoice',compact('latest','total_purchaseAmount','address','phone','name','trans'));
     }
-    // public function getsale() {
 
-    //  return view('admin.sale');
-
-    // }
 }

@@ -63,6 +63,7 @@
                                      <thead>
                                         <tr>
                                               <th class="text-center" scope="col">#</th>
+                                              <th scope="col">Transaction Id</th>
                                               <th scope="col">Item ID</th>
                                               <th scope="col">Product Name</th>
                                               <th scope="col">Product Quantity</th>
@@ -73,11 +74,12 @@
                                      </thead>
                                      <tbody>
 
-                                                @foreach ($latest as $key=>$value )
+                                                @foreach ($trans as $key=>$value )
 
 
                                         <tr>
                                               <th class="text-center" scope="row">{{++$key}}</th>
+                                              <th class="text-center" scope="row">{{$value->tran_id}}</th>
                                               <td>
                                                  <h6 class="mb-0">{{$value->product_id}}</h6>
                                             @php

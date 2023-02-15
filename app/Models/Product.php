@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Sale;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
@@ -12,6 +13,7 @@ class Product extends Model
         'name','description','quantity','purchase_price',
         'sales_price','image'
     ];
+
 
      public function sales()
      {

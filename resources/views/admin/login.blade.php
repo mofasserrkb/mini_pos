@@ -31,6 +31,7 @@
                      <div class="card-body p-0">
                         <div class="d-flex align-items-center auth-content">
                            <div class="col-lg-7 align-self-center">
+                            <x-auth-validation-errors class="mb-4" :errors="$errors" />
                               <div class="p-3">
                                  <h2 class="mb-2">Sign In</h2>
 
